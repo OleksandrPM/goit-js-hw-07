@@ -10,18 +10,41 @@ galleryEl.insertAdjacentHTML('beforeend', galleryMarkup);
 galleryEl.addEventListener('click', onGalleryClick);
 
 function onGalleryClick(event) {
-  if (!event.target.classList.contains('gallery__image')) {
+  event.preventDefault();
+
+  const isImage = event.target.classList.contains('gallery__image');
+
+  if (!isImage) {
     return;
   }
-  console.log(event.target.dataset.source);
 
-  basicLightbox
-    .create(
-      `
-		<img width="1400" height="900" src="${event.target.dataset.source}">
+  const bigImageURL = event.target.dataset.source;
+
+  const instance = createLightboxInstance(bigImageURL);
+
+  instance.show();
+
+  keyCloseInstance(instance, 'Escape');
+}
+
+function keyCloseInstance(instance, keyName) {
+  if (instance.visible()) {
+    document.addEventListener('keydown', event => {
+      const pressedKey = event.key;
+
+      if (pressedKey === keyName) {
+        instance.close();
+      }
+    });
+  }
+}
+
+function createLightboxInstance(URL) {
+  return basicLightbox.create(
+    `
+		<img width="1400" height="900" src="${URL}">
 	`
-    )
-    .show();
+  );
 }
 
 function createGalleryMarkup(gallery) {
@@ -30,7 +53,7 @@ function createGalleryMarkup(gallery) {
 
 function createItemMarkup({ preview, original, description }) {
   return `<div class="gallery__item">
-      <a class="gallery__link" href="${original}" rel="noreferrer, noopener">
+      <a class="gallery__link" href="${original}">
         <img
           class="gallery__image"
           src="${preview}"
