@@ -1,6 +1,8 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
+const closeModalKey = 'Escape';
+
 const galleryEl = document.querySelector('.gallery');
 
 const galleryMarkup = createGalleryMarkup(galleryItems);
@@ -24,10 +26,10 @@ function onGalleryClick(event) {
 
   instance.show();
 
-  keyCloseInstance(instance, 'Escape');
+  closeInstanceByKey(instance, closeModalKey);
 }
 
-function keyCloseInstance(instance, keyName) {
+function closeInstanceByKey(instance, keyName) {
   if (instance.visible()) {
     document.addEventListener('keydown', event => {
       const pressedKey = event.key;
