@@ -36,6 +36,7 @@ function closeInstanceByKey(instance, keyName) {
 
       if (pressedKey === keyName) {
         instance.close();
+        document.removeEventListener('keydown', event);
       }
     });
   }

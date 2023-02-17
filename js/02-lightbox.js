@@ -9,9 +9,10 @@ const galleryMarkup = createGalleryMarkup(galleryItems);
 
 galleryEl.insertAdjacentHTML('beforeend', galleryMarkup);
 
-let lightbox = new SimpleLightbox('.gallery a', {});
-lightbox.defaultOptions.captionDelay = captionDelayTime;
-lightbox.defaultOptions.captionsData = captionsDataSource;
+let lightbox = new SimpleLightbox('.gallery a', {
+  captionDelay: captionDelayTime,
+  captionsData: captionsDataSource,
+});
 
 function createGalleryMarkup(gallery) {
   return gallery.map(item => createItemMarkup(item)).join('');
