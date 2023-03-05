@@ -45,7 +45,7 @@ function closeInstanceByKey(instance, keyName) {
 function createLightboxInstance(URL) {
   return basicLightbox.create(
     `
-		<img width="1400" height="900" src="${URL}">
+		<img width="1280" height="auto" src="${URL}">
 	`
   );
 }
